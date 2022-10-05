@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet"
+        href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>BookStore </title>
+</head>
+
+<body>
+    <!-- <div class="subscribe-container"> -->
+    <!-- <form method="POST">
+        <input type="text" name="title" placeholder="Title" required>
+        <input type="text" name="author" placeholder="Author" required><br>
+        <input class="subscribe-button" type="submit" value="submit">
+        <hr><br>
+        <table id="books"></table>
+    </form> -->
+
+    <script>
+        function validateForm() {
+            // class Res {
+            //     static isSuccess = false;
+            // }
+            var title = document.forms.RegForm.title.value;
+            var isbn = document.forms.RegForm.isbn.value;
+            var author = document.forms.RegForm.author.value;
+            var price = document.forms.RegForm.price.value;
+            var origin = document.forms.RegForm.origin.value;
+            var pages = document.forms.RegForm.pages.value;
+            var published_year = document.forms.RegForm.published_year.value;
+            var stock = document.forms.RegForm.stock.value;
+            var isdigial = document.forms.RegForm.isdigial.value;
+
+            if (title == "") {
+                window.alert("Please enter Book name properly.");
+                name.focus();
+                return false;
+                // Res.isSuccess = false;
+            }
+            if (isbn == "") {
+                window.alert("Please enter ISBN Number name properly.");
+                name.focus();
+                return false;
+                // Res.isSuccess = false;
+            }
+            if (author == "") {
+                window.alert("Please enter Author Name name properly.");
+                name.focus();
+                return false;
+                // Res.isSuccess = false;
+            }
+            if (price == "") {
+                window.alert("Please enter Price of Book properly.");
+                name.focus();
+                return false;
+                // Res.isSuccess = false;
+            }
+            if (published_year == "") {
+                window.alert("Please enter Published Year properly.");
+                name.focus();
+                return false;
+                // Res.isSuccess = false;
+            }
+            if (stock == "") {
+                window.alert("Please enter Stocks properly.");
+                name.focus();
+                return false;
+                // Res.isSuccess = false;
+            }
+            if (isdigial == "") {
+                window.alert("Please Enter isDigital properly.");
+                name.focus();
+                return false;
+                // Res.isSuccess = false;
+            }
+            return true;
+            // Res.isSuccess = true;
+        }
+
+        // function doStuff() {
+        //     if (isSuccess == true)
+        //         document.getElementById("submit-button").click();
+        //     else
+        //         document.getElementById("error").innerHTML("There is some Error.")
+        // }
+    </script>
+    <!-- Bootstrap -->
+    <h1 class="text-center p-5"> Add Book </h1>
+    <hr>
+    <div class="container text-center">
+        <form name="RegForm" onsubmit="validateForm()" method="POST">
+            <div class="form-inline">
+                <div class="form-group">
+                    <label for="bookTitle">Enter Name of Book : </label>
+                    <input type="text" class="form-control" name="title" placeholder="Enter Title" required>
+                </div>
+                <br>
+                <div class="form-group ">
+                    <label for="bookISBN">Enter ISBN Number of Book : </label>
+                    <input type="text" class="form-control" name="isbn" placeholder="Enter ISBN" required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="bookAuthor">Enter Author Name of Book : </label>
+                    <input type="text" class="form-control" name="author" placeholder="Enter Author" required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="bookPrice">Enter Price of Book : </label>
+                    <input type="text" class="form-control" name="price" placeholder="Enter Price" required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="bookOrigin">Enter Counter of Origin of Book : </label>
+                    <input type="text" class="form-control" name="origin" placeholder="Enter Counter of Origin">
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="bookPages">Enter Total Pages of Book : </label>
+                    <input type="number" class="form-control" name="pages" placeholder="Enter Pages">
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="bookYear">Enter Published Year of Book : </label>
+                    <input type="number" class="form-control" name="published_year" placeholder="Enter Published Year"
+                        required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="bookStock">Enter Available Stocks of Book : </label>
+                    <input type="number" class="form-control" name="stock" placeholder="Enter Available Stocks"
+                        required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="bookDigital">Is Digital Copy Available of Book ? : </label>
+                    <select class="form-control" name="isdigial" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <br>
+            </div>
+            <button type="submit" class="btn btn-primary" value="submit">Submit</button>
+        </form>
+    </div>
+    <div class="text-center">
+        <p id="error"></p>
+        <a class="btn btn-success text-center" href="list.html" role="button">Show List</a>
+    </div>
+    <!-- <script>
+        // axios.get('http://localhost:8082/api/books')
+        // .then(response =>{
+        //     console.log("Get Request from Index.html"); 
+        //     console.log(response.data)
+        // })
+
+        // main.js
+
+        // GET request using fetch()
+        fetch("http://localhost:8082/api/books")
+
+            // Converting received data to JSON
+            .then(response => response.json())
+            .then(json => {
+
+                // Create a variable to store HTML
+                let li = `<tr><th>Book</th><th>Author</th></tr>`;
+
+                // Loop through each data and add a table row
+                json.forEach(book => {
+                    li += `<tr>
+                            <td>${book.title} </td>
+                            <td>${book.author}</td>
+                            </tr>`;
+                });
+
+                // Display result
+                document.getElementById("books").innerHTML = li;
+            });
+    </script> -->
+</body>
+
+</html>

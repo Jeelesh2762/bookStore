@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css">
+    <link rel="stylesheet" href="app.css">
+    <title>Show List of Books</title>
+</head>
+
+<body>
+    <h1 class="text-center p-5">Show Books List </h1>
+    <hr>
+    <div class="container">
+        <table id="books"></table>
+        <br>
+        <div class="text-center">
+            <a class="btn btn-primary text-center" href="http://localhost:3000/" role="button">Add Book</a>
+        </div>
+    </div>
+
+    <script>
+        // GET request using fetch()
+        fetch("http://localhost:8082/api/books")
+
+            // Converting received data to JSON
+            .then(response => response.json())
+            .then(json => {
+
+                // Create a variable to store HTML
+                let li =
+                    `<tr><th>Book</th><th>ISBN</th><th>Author</th><th>Price</th><th>Origin</th><th>Pages</th><th>Published Year</th><th>Stock</th><th>Is Digital</th></tr>`;
+
+                // Loop through each data and add a table row
+                json.forEach(book => {
+                    li += `<tr>
+                            <td>${book.title} </td>
+                            <td>${book.isbn}</td>
+                            <td>${book.author}</td>
+                            <td>${book.price}</td>
+                            <td>${book.origin}</td>
+                            <td>${book.pages}</td>
+                            <td>${book.published_year}</td>
+                            <td>${book.stock}</td>
+                            <td>${book.isdigital}</td>
+                            </tr>`;
+                });
+
+                // Display result
+                document.getElementById("books").innerHTML = li;
+            });
+    </script>
+</body>
+
+</html>
