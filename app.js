@@ -20,7 +20,7 @@ app.use(express.json({ extended: false }));
 app.use('/api/books', books);
 
 
-app.get('/', (req, res) => res.send("<h1>Hello world! it's Jeelesh</h1>"));
+app.get('/', (req, res) => res.send("<h1>Hello world! it's Jeelesh</h1><hr><h3>This is Backend for Book Store.</h3>"));
 
 const port = process.env.PORT || 8082;
 
