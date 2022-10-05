@@ -49,7 +49,7 @@ app.post("/", (req, res) => {
     // var isdigital = req.body.isdigital;
 
     // POST request using fetch()
-    fetch("http://localhost:8082/api/books", {
+    fetch("https://bookstore-backend276.herokuapp.com/api/books", {
 
             // Adding method type
             method: "POST",
