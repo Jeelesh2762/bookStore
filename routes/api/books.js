@@ -10,16 +10,23 @@ router.get('/test', (req, res) => res.send('Book Route Testing!'));
 router.get('/', (req, res) => {
     Book.find()
         .then(books => res.json(books))
-        .catch(err => res.status(404).json({ nobooksfound: 'No Books found' }));
+        .catch(err => res.status(404).json({
+            nobooksfound: 'No Books found'
+        }));
 });
 
 // @route GET api/books/:id
 // @description Get single book by isbn
 // @access Public
 router.get('/:id', (req, res) => {
-    Book.findById(req.params.id)
+    // console.log(req.params.id);
+    Book.find({
+            isbn: req.params.id
+        })
         .then(book => res.json(book))
-        .catch(err => res.status(404).json({ nobookfound: 'No Book found' }));
+        .catch(err => res.status(404).json({
+            nobookfound: 'No Book found'
+        }));
 });
 
 // @route GET api/books
@@ -27,8 +34,12 @@ router.get('/:id', (req, res) => {
 // @access Public
 router.post('/', (req, res) => {
     Book.create(req.body)
-        .then(book => res.json({ msg: 'Book added successfully' }))
-        .catch(err => res.status(400).json({ error: 'Unable to add this book' }));
+        .then(book => res.json({
+            msg: 'Book added successfully'
+        }))
+        .catch(err => res.status(400).json({
+            error: 'Unable to add this book'
+        }));
 });
 
 
@@ -36,10 +47,16 @@ router.post('/', (req, res) => {
 // @description Update book
 // @access Public
 router.put('/:id', (req, res) => {
-    Book.findByIdAndUpdate(req.params.id, req.body)
-        .then(book => res.json({ msg: 'Updated successfully' }))
+    Book.findByIdAndUpdate({
+            isbn: req.params.id
+        }, req.body)
+        .then(book => res.json({
+            msg: 'Updated successfully'
+        }))
         .catch(err =>
-            res.status(400).json({ error: 'Unable to update the Database' })
+            res.status(400).json({
+                error: 'Unable to update the Database'
+            })
         );
 });
 
@@ -47,9 +64,15 @@ router.put('/:id', (req, res) => {
 // @description Delete book by id
 // @access Public
 router.delete('/:id', (req, res) => {
-    Book.findByIdAndRemove(req.params.id, req.body)
-        .then(book => res.json({ mgs: 'Book entry deleted successfully' }))
-        .catch(err => res.status(404).json({ error: 'No such a book' }));
+    Book.findByIdAndRemove({
+            isbn: req.params.id
+        }, req.body)
+        .then(book => res.json({
+            mgs: 'Book entry deleted successfully'
+        }))
+        .catch(err => res.status(404).json({
+            error: 'No such a book'
+        }));
 });
 
 
