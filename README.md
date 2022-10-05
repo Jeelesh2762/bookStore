@@ -1,6 +1,11 @@
 # bookStore
 BookStore Application
 
+# Code Base
+Client :- https://github.com/Jeelesh2762/bookStore/tree/client
+####
+Server :- https://github.com/Jeelesh2762/bookStore/tree/server
+
 # Api's Syntex for Backend (Task 1)
 Add a Book :- https://bookstore-backend276.herokuapp.com/api/books (POST)
 ####
