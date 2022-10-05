@@ -75,8 +75,8 @@ app.post("/", (req, res) => {
         // Converting to JSON
         .then(response => response.json())
         // Displaying results to console
-        .then(json => console.log(json))
-
+        .then(json => console.log(json));
+    console.log("Success");
     res.send("Hurray <h2>" + title + " </he>Book is inserted Successfully!");
     // var request = new XMLHttpRequest();
     // request.open('GET', 'http://localhost:8082/api/books');
